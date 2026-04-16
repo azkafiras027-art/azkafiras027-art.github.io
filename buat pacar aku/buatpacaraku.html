@@ -1,0 +1,109 @@
+<!DOCTYPE html> <!-- HTML5 -->
+<html lang="id">
+<head>
+    <meta charset="UTF-8"> <!-- Encoding -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsif -->
+    <title>Untuk Kamu 💖</title>
+
+    <link rel="stylesheet" href="buatpacaraku.css"> <!-- CSS -->
+</head>
+<body>
+
+<!-- Container -->
+<div class="container">
+
+    <h1 id="title">Hei kamu… 😔</h1>
+    <p id="text">Aku tahu kamu lagi bad mood...</p>
+
+    <!-- Tombol -->
+    <div class="buttons" id="buttons">
+        <button onclick="nextStep()">Iya 😢</button>
+        <button id="noBtn">Nggak 😒</button>
+    </div>
+
+</div>
+
+<!-- Container hati -->
+<div class="hearts"></div>
+
+<script>
+let step = 0;
+
+// Tombol kabur 😈
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * 80 + "%";
+    noBtn.style.top = Math.random() * 80 + "%";
+});
+
+function nextStep() {
+    step++;
+
+    const title = document.getElementById("title");
+    const text = document.getElementById("text");
+    const buttons = document.getElementById("buttons");
+
+    if (step === 1) {
+        title.innerHTML = "Maaf ya...";
+        text.innerHTML = "Aku tahu aku kadang bikin kamu kesel 😔";
+    } 
+    else if (step === 2) {
+        title.innerHTML = "Tapi jujur...";
+        text.innerHTML = "Aku nggak pernah niat nyakitin kamu 😢";
+    } 
+    else if (step === 3) {
+        title.innerHTML = "Soalnya...";
+        text.innerHTML = "Kamu itu penting banget buat aku ❤️";
+    } 
+    else if (step === 4) {
+        title.innerHTML = "Jadi...";
+        text.innerHTML = "Boleh aku bikin kamu senyum lagi? 😊";
+
+        buttons.innerHTML = `
+            <button onclick="ending()">Boleh 💖</button>
+            <button id="noBtn2">Nggak 😤</button>
+        `;
+
+        // tombol kabur lagi
+        document.getElementById("noBtn2").addEventListener("mouseover", function() {
+            this.style.position = "absolute";
+            this.style.left = Math.random() * 80 + "%";
+            this.style.top = Math.random() * 80 + "%";
+        });
+    }
+}
+
+function ending() {
+    document.body.innerHTML = `
+        <div class="ending">
+            <h1>Yay! 💖</h1>
+            <p>Kamu akhirnya senyum 😊</p>
+            <p>Aku sayang kamu ❤️</p>
+        </div>
+        <div class="hearts"></div>
+    `;
+
+    startHearts();
+}
+
+// Efek hati jatuh
+function startHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (10 + Math.random() * 20) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+    }, 200);
+}
+</script>
+
+</body>
+</html>
